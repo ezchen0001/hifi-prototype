@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <title> Resupply Counter</title>
+    <script> 
+	class ItemRecord {
+		constructor(itemName, itemCount, keepStocked) {
+			this.itemName = itemName;
+			this.itemCount = itemCount;
+			this.keepStocked = keepStocked;
+		}
+	}
+	class ListElement {
+		constructor(container, info, counter) {
+			this.container = container;
+			this.info = info;
+			this.counter = counter;
+		}
+	}
+	class ShoppingListElement {
+		constructor(checkbox, label, index, amount,div) {
+			this.checkbox = checkbox;
+			this.label = label;
+			this.index = index;
+			this.amount = amount;
+			this.div = div;
+		}
+	}
+	var listElements = [];
+	var shoppingListElements = [];
+	var records = [];
+    </script>
+</head>
+
+<body onload="">
+    <!-- HTML5 article tag for content -->
+    <div id="content">
+   
+    <header>Resupply Counter</header>
+
+   <h1 id="header1"> Items </h1>
+    
+
+   
+   <div id="itemForm" class="form" hidden>
+	
+		<p>Add a new item 
+			<button class="x_box" onclick="openDefault();">X</button> 
+		</p>    
+		<form  id="register" onsubmit="createItemButtonPress();return false;">             
+			<!-- FORM FIELDS GO HERE -->       
+			<div for="name">Item Name</div>
+
+<input type="text" name="name" id="name" required>
+
+			<div for="name">Current amount of item</div>
+	<input type="number" name="amount" id="amount" required>
+			<div for="name">Amount to keep stored</div>     
+<input type="number" name="toStock" id="toStock" required>
+			<br />       
+			<input type="submit" value="Create item" >    
+		</form>          
+   </div>
+
+   
+   <div id="changeItemForm" class="form" hidden>
+	
+		<p>Change an item 
+			<button class="x_box" onclick="openDefault();">X</button> 
+		</p>    
+		<form  id="register" onsubmit="changeItemButtonPress();return false;">             
+			<!-- FORM FIELDS GO HERE -->       
+			<div for="name">Item Name</div>
+
+<input type="text" name="name" id="changeName" required>
+
+			<div for="name">Current amount of item</div>
+	<input type="number" name="amount" id="changeAmount" required>
+			<div for="name">Amount to keep stored</div>     
+<input type="number" name="toStock" id="changeToStock" required>
+			<br />       
+			<input class="apply" type="submit" value="Apply changes"> 
+			<div>
+			<button type='button' oncontextmenu="return false;" id="deleteItemButton" class="delete">Hold to Delete</div>    
+		</form>          
+   </div>
+
+
+   
+   <div id="main_nav" >
+      <ul id="item_list">
+
+      </ul>
+      <div id="shopping_list" hidden>
+	
+      </div>
+   </div>
+
+
+
+    </div>	
+	<button id="addButton" onclick="openItemForm();">+</button>
+	<button id="createShoppingListButton" onclick="createShoppingListButtonPress()">Create shopping list</button>
+
+</body>
+</html>
+
+<script>
+var itemToModify = 0;
+
+function addItemLi(){
+
+	var index = listElements.length
+	var li=document.createElement("li"); 
+	li.classList.add("item_element");
+	var info = document.createElement("button");
+	info.classList.add("info");
+	info.innerHTML = "Info";
+	info.onclick=function(){loadInfo(index);};
+	
+	var arrow = document.createElement("div");
+	arrow.classList.add("arrow_box");
+	arrow.innerHTML = ">";	
+	info.append(arrow);
+	info.onclick=function(){loadInfo(index);};
+
+	var increment = document.createElement("button");
+	increment.classList.add("increment");
+	increment.innerHTML = "+";
+	increment.onclick=function(){applyIncrement(index);};
+	var counter = document.createElement("div");
+	counter.classList.add("counter");
+	counter.innerHTML = "0";
+	
+	var decrement = document.createElement("button");
+	decrement.classList.add("decrement");
+	decrement.innerHTML = "-";
+	decrement.onclick=function(){applyDecrement(index);};
+	li.append(info);
+	li.append(increment);
+	li.append(counter);
+	li.append(decrement);	
+
+
+	var p=document.getElementById("item_list");
+	p.append(li);
+
+	listElements.push(new ListElement(li, info, counter));
+
+}
+function removeItemLi(){
+	if(listElements.length > 0){
+		listElements.pop().container.remove();
+	}
+}
+
+function updateUI(){
+
+	for(var i = listElements.length; i < records.length; i++){
+		addItemLi();
+	}
+	for(var i = listElements.length; i > records.length; i--){
+		removeItemLi();
+	}
+	for(var i = 0; i < records.length; i++){
+		listElements[i].info.innerHTML = records[i].itemName;
+		listElements[i].counter.innerHTML = records[i].itemCount;
+	}
+}
+
+function applyDecrement(index){
+	if(records[index].itemCount){
+		records[index].itemCount--;
+	}
+	updateUI();
+}
+function applyIncrement(index){
+	records[index].itemCount++;
+	updateUI();
+}
+
+function loadInfo(index){
+	itemToModify = index;
+	var name = document.getElementById("changeName");
+	var amount = document.getElementById("changeAmount");
+	var toStock = document.getElementById("changeToStock");
+	name.value = records[itemToModify].itemName;
+	amount.value = records[itemToModify].itemCount;
+	toStock.value = records[itemToModify].keepStocked;
+	openChangeItemForm()
+}
+
+function openItemForm(){
+	document.getElementById("item_list").style.display="none";	document.getElementById("itemForm").style.display="block";	document.getElementById("changeItemForm").style.display="none";	document.getElementById("shopping_list").style.display="none";	document.getElementById("createShoppingListButton").style.display="none";	document.getElementById("addButton").style.display="none";
+}
+
+function openDefault(){
+	document.getElementById("item_list").style.display="block";	document.getElementById("itemForm").style.display="none";	document.getElementById("changeItemForm").style.display="none";	document.getElementById("shopping_list").style.display="none";
+	document.getElementById("createShoppingListButton").style.display="block";	document.getElementById("addButton").style.display="block";
+	document.getElementById("header1").innerHTML = "Items";	document.getElementById("createShoppingListButton").innerHTML = "Create shopping list";
+}
+
+function openChangeItemForm(){
+	document.getElementById("item_list").style.display="none";	document.getElementById("itemForm").style.display="none";	document.getElementById("changeItemForm").style.display="block";	document.getElementById("shopping_list").style.display="none";	document.getElementById("createShoppingListButton").style.display="none";	document.getElementById("addButton").style.display="none";
+
+}
+
+function openShoppingList(){
+	document.getElementById("item_list").style.display="none";	document.getElementById("itemForm").style.display="none";	document.getElementById("changeItemForm").style.display="none";	document.getElementById("shopping_list").style.display="block";	document.getElementById("createShoppingListButton").style.display="block";	document.getElementById("addButton").style.display="none";	document.getElementById("header1").innerHTML = "Shopping List";	document.getElementById("createShoppingListButton").innerHTML = "Return";
+
+}
+
+
+function createItemButtonPress(){
+	openDefault();
+	var name = document.getElementById("name");
+	var amount = document.getElementById("amount");
+	var toStock = document.getElementById("toStock");
+	records.push(new ItemRecord(name.value, +amount.value, +toStock.value));
+	records.sort(function(a,b){ return a.itemName.localeCompare(b.itemName)});
+	updateUI();
+
+}
+
+function changeItemButtonPress(){
+	openDefault();
+	var name = document.getElementById("changeName");
+	var amount = document.getElementById("changeAmount");
+	var toStock = document.getElementById("changeToStock");
+	records[itemToModify] = new ItemRecord(name.value, +amount.value, +toStock.value);
+	records.sort(function(a,b){ return a.itemName.localeCompare(b.itemName)});
+	updateUI();
+}
+
+function deleteItemButtonPress(){
+	openDefault();
+	records.splice(itemToModify,1);
+	updateUI();
+}
+
+function holdit(btn, action, start, speedup) {
+    var t;
+    btn.onmousedown = function() {
+	
+        t = setTimeout(action, start);
+    }
+    btn.ontouchstart = btn.onmousedown;
+    btn.onmouseup = function () {
+        clearTimeout(t);
+    }
+    btn.ontouchend = btn.onmouseup;
+    btn.ontouchcancel = btn.onmouseup;
+};
+
+/* to use */
+holdit(document.getElementById("deleteItemButton"), function () {deleteItemButtonPress(); }, 1000, 2);
+
+
+function createShoppingListElement(index, amount){
+	var checkbox = document.createElement("input");
+	checkbox.setAttribute("type", "checkbox");
+	checkbox.setAttribute("id", "checkbox"+index);
+	checkbox.setAttribute("name", "checkbox"+index);
+	var label = document.createElement("label");
+	label.setAttribute("for", "checkbox"+index);
+	label.innerHTML = ""+records[index].itemName+" x"+amount;
+	var div = document.createElement("div");
+	div.append(checkbox);
+	div.append(label);
+	document.getElementById("shopping_list").append(div);
+	shoppingListElements.push(new ShoppingListElement(checkbox, label, index, amount,div));
+	//<input type="checkbox" id="vehicle3" name="vehicle3" value="Boat" checked>
+  	//<label for="vehicle3"> I have a boat</label><br><br>
+}
+//createShoppingListElement(0,1234)
+
+function clearShoppingListElements(){
+	for(var i = 0; i < shoppingListElements.length; i++){
+		shoppingListElements[i].checkbox.remove();	
+		shoppingListElements[i].label.remove();
+		shoppingListElements[i].div.remove();
+	}
+	shoppingListElements = [];
+}
+
+
+function createShoppingListButtonPress(){
+	document.getElementById("createShoppingListButton").onclick = returnButtonPress;
+	for(var i = 0; i < records.length; i++){
+		if((records[i].itemCount - records[i].keepStocked) < 0){		
+			createShoppingListElement(i,records[i].keepStocked - records[i].itemCount)
+		}
+	}
+	openShoppingList();
+}
+
+function returnButtonPress(){
+	document.getElementById("createShoppingListButton").onclick = createShoppingListButtonPress;
+	for(var i = 0; i < shoppingListElements.length; i++){
+		var el = shoppingListElements[i];
+		if(el.checkbox.checked){
+			records[el.index].itemCount = records[el.index].itemCount + el.amount;	
+		}
+	}
+	clearShoppingListElements();
+	openDefault();
+	updateUI();
+}
+
+</script>

@@ -1,0 +1,351 @@
+html, body {
+    height: 100%;
+    width: 480px;
+    height :880px;
+}
+
+html {
+    display: table;
+    margin: auto;
+    background-color: grey;
+}
+
+body {
+	min-height: 100%;
+    display: table-cell;
+    vertical-align: top;
+    background-color: white;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: CadetBlue;
+  border-radius: 10px;
+}
+
+header {
+ font-family: Futura, Trebuchet MS; 
+ font-weight: bold condensed;
+ font-size: 25px;
+ color: white; 
+ background-color: CadetBlue;
+}
+body {
+ font-family: Futura, Trebuchet MS; 
+ font-weight: normal;
+ color: #000000; 
+ font-size: 12px;
+}
+h1 {
+ font-family: Futura, Trebuchet MS;
+ font-weight: bold condensed;
+ color: CadetBlue;
+ font-size: 30px;
+}
+#content {
+    padding:3px;
+}
+p {
+    padding:3px;
+}
+h1 {
+    padding:10px 20px;
+}
+header {
+    padding:15px 15px 15px;
+}
+
+#main_nav {
+	overflow:scroll;
+	overflow-x: hidden;
+        display:block;
+	height: 600px;
+}
+#main_nav ul { padding: 0; margin: 0; }
+
+#main_nav li  {
+  list-style-type: none; /* remove bullet points */ 
+}
+
+#main_nav li a {
+   //display: block;
+   text-decoration: none; /* remove underline */
+   border-radius: 10px;  /* rounded corners */
+   margin: 6px;
+   padding: 9px;
+   color: #222;
+   font-weight: bold;
+
+   /* nice gradient shade on the buttons */
+   background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1));
+
+   border: 1px solid #666; /* dark outline */
+}
+/*nav li:active {
+  background-color: #ccc;
+  background-image: none;
+  box-shadow: inset 0 3px 3px rgba(0, 0, 0, .2);
+}*/
+
+footer {
+ font-family: Futura, Trebuchet MS;
+ font-weight: normal;
+ color: #000000; 
+ font-size: 10px;
+}
+
+
+
+video {
+ 	border: 2px solid #666; /* dark outline */
+ 	border-radius: 10px;  /* rounded corners */
+   	padding: 9px;
+	margin-top: 5px;
+  	margin-bottom: 5px;
+ 	/* transitions applied to the video element */
+ 	-moz-transition: all 1s ease-in-out;
+ 	-webkit-transition: all 1s ease-in-out;
+ 	-o-transition: all 1s ease-in-out;
+ 	-ms-transition: all 1s ease-in-out;
+ 	transition: all 1s ease-in-out;
+}
+
+audio {
+ 	border: 2px solid #666; /* dark outline */
+ 	border-radius: 10px;  /* rounded corners */
+   	padding: 9px;
+	margin-top: 5px;
+  	margin-bottom: 5px;
+}
+
+header.secondary{   
+padding-left: 75px;
+}
+
+
+
+#addButton {
+	 font-family: Futura, Trebuchet MS; 
+ font-weight: bold condensed;
+ font-size: 30px;
+ /*center the button*/
+display: block;
+width:60px;
+height: 60px;
+border-radius: 30px;
+margin-left: auto;
+margin-top: auto;
+//border: 1px solid black;
+ position:relative;
+margin-top: 30px;
+margin-right: 10px;
+margin-bottom: 10px;
+	background-color: #a2b0ae;
+/* add your code to set top and bottom margins */
+ 
+/*add an image to your button*/
+//-webkit-border-image: url("orangeButton.png") 14 14 14 14 stretch;
+//background-size: cover;
+
+/*set width and height for the button*/
+}
+
+#addButton:active {
+
+	background-color: #719690; 
+  	color: white;
+}
+
+.info, .increment, .decrement, .counter {
+	display: inline;
+	display: inline-block;
+	border-radius: 1px;
+	border: 0px solid black;
+	height: 100%;
+	 font-family: Futura, Trebuchet MS; 
+ font-weight: bold condensed;
+ font-size: 25px;
+	text-align: center;
+	position:relative;
+	margin: 2px;
+	
+}
+.counter {
+	line-height: 40px;
+
+}
+.info {
+	width: 50%;
+	background-color: #a2b0ae;
+}
+.info:active {
+	background-color: #719690;  	
+	color: white;
+}
+.increment, .decrement, .counter {
+	width: 15%;
+	border: 1px solid grey;
+	
+}
+.increment:active, .decrement:active {
+	background-color: grey;
+  	color: white;
+}
+
+.item_element {
+	width: auto;
+	margin: 20px 40px;
+	height: 40px;
+}
+
+.arrow_box { 
+
+	height: 30px;
+	width: 30px;	
+	position: absolute;
+	margin-left: calc(100% - 40px);
+	margin-right: 0px;
+	margin-top: -30px;
+	margin-bottom: 0px;
+	//border: 1px solid grey;
+
+}
+.x_box { 
+	
+	height: 30px;
+	width: 30px;	
+	position: absolute;
+	margin-left: 70px;
+	margin-right: 10px;
+	margin-top: 10px;
+	margin-bottom: 0px;
+	//border: 1px solid grey;
+
+}
+button {
+	transition-duration: 0.1s;
+}
+
+.form {
+	background-color: #c5d6d6;
+	border: 1px solid DimGray;
+	position: absolute;
+	margin-top: 30px;
+	margin-left: 30px;
+	width: 400px;
+	
+}
+
+.form p {
+text-align: center;
+ margin-top: 0px;
+ font-family: Futura, Trebuchet MS; 
+ font-weight: bold condensed;
+ font-size: 25px;
+ height: 50px;
+ line-height:2;
+ color: white; 
+ background-color: CadetBlue;
+}
+
+.form div {
+text-align: center;	 
+font-family: Futura, Trebuchet MS; 
+ font-weight: bold condensed;
+ font-size: 25px;
+color: DimGray;
+}
+.form {
+box-shadow: 10px 5px 5px DimGrey;
+ text-align: center;	 
+ font-family: Futura, Trebuchet MS; 
+ font-weight: bold condensed;
+ font-size: 25px;
+}
+
+.form input {
+	height: 30px;
+	width: 80%;
+	border: 1px solid grey;
+	border-radius: 20px; text-align: center;	 
+ font-family: Futura, Trebuchet MS; 
+ font-weight: bold condensed;
+ font-size: 25px;
+	margin-bottom: 20px;
+
+}
+.delete {
+	background-color: #f0ccd2;
+	border: 1px solid grey;
+	border-radius: 20px; text-align: center;	 
+ font-family: Futura, Trebuchet MS; 
+ font-weight: bold condensed;
+ font-size: 25px;
+margin-right: 100%;
+}
+.delete:active {
+	background-color: #c9adb2;
+}
+
+.apply {
+position: absolute;
+margin-left: calc(100%-40px);
+max-width: 200px;
+min-height: 90px;
+
+}
+
+#createShoppingListButton {
+	 font-family: Futura, Trebuchet MS; 
+ font-weight: bold condensed;
+ font-size: 30px;
+ /*center the button*/
+display: block;
+width: auto;
+height: 60px;
+border-radius: 10px;
+margin-left: 0px;
+margin-top: auto;
+//border: 1px solid black;
+ position:absolute;
+margin-top: -70px;
+margin-right: 10px;
+margin-bottom: 10px;
+	background-color: #a2b0ae;
+/* add your code to set top and bottom margins */
+ 
+/*add an image to your button*/
+//-webkit-border-image: url("orangeButton.png") 14 14 14 14 stretch;
+//background-size: cover;
+
+/*set width and height for the button*/
+}
+
+#createShoppingListButton:active {
+	background-color: #719690; 
+  	color: white;
+	
+}
+#shopping_list{
+	margin-left: 30px;
+}
+#shopping_list input {
+	width: 30px;
+	height: 30px;
+}
+#shopping_list label {
+	 font-family: Futura, Trebuchet MS; 
+ font-weight: bold condensed;
+ font-size: 30px;
+color: DimGrey;
+}
