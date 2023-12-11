@@ -1,2 +1,2 @@
-# supreme-memory
+# hifi-prototype
 hifi-prototype for assignment4
